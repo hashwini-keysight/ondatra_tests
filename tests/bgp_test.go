@@ -15,8 +15,14 @@ func TestMain(m *testing.M) {
 
 func TestGoSnappiK8s_001(t *testing.T) {
 	t.Log("TestGoSnappiK8s_001 - START ...")
-	ondatra.ATEs(t)
-	otg := ondatra.OTGs(t)
+	//ates := ondatra.ATEs(t)
+
+	//ate := ondatra.ATE(t, "ate")
+	ate1 := ondatra.ATE(t, "ate1")
+	ondatra.ATE(t, "ate2")
+	ondatra.ATE(t, "ate3")
+
+	otg := ate1.OTG()
 
 	defer otg.NewConfig(t)
 	defer otg.StopProtocols(t)
@@ -44,7 +50,7 @@ func TestGoSnappiK8s_001(t *testing.T) {
 	t.Log("TestGoSnappiK8s_001 - END ...")
 }
 
-func PacketForwardBgpv6Config(t *testing.T, otg *ondatra.OTG) gosnappi.Config {
+func PacketForwardBgpv6Config(t *testing.T, otg *ondatra.OTGAPI) gosnappi.Config {
 	config := otg.NewConfig(t)
 
 	// add ports
